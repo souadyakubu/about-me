@@ -8,7 +8,7 @@ const StartPageWrapper = styled(motion.div)`
   justify-content: center;
   align-items: center;
   height: 100vh;
-  background-color: #001f3f; 
+  background-color: #0a0a1f;
   color: #ffffff; 
   overflow: hidden;
 `;
