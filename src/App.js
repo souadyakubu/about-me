@@ -6,7 +6,7 @@ import IntroductionPage from './components/IntroductionPage';
 import ExperiencePage from './components/ExperiencePage';
 import PetProjectPage from './components/PetProjectPage';
 import AchievementsPage from './components/AchievementsPage'; // Import the new AchievementsPage component
-import { BrowserRouter as Router, Route, Routes, Navigate, useNavigate } from 'react-router-dom';
+import { BrowserRouter as Router, Route, Routes, useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 import { AnimatePresence } from 'framer-motion';
 

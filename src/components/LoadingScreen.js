@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useEffect } from 'react';
 import styled, { keyframes } from 'styled-components';
 
 const typing = keyframes`
@@ -44,26 +44,23 @@ const FadeInWrapper = styled.div`
 `;
 
 const LoadingScreen = ({ onLoadingComplete }) => {
-    const [isTypingComplete, setIsTypingComplete] = useState(false);
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      onLoadingComplete();
+    }, 4000); // Adjust this time to match your typing animation duration
 
-    useEffect(() => {
-        const timer = setTimeout(() => {
-            setIsTypingComplete(true);
-            onLoadingComplete();
-        }, 4000); // Adjust this time to match your typing animation duration
+    return () => clearTimeout(timer);
+  }, [onLoadingComplete]);
 
-        return () => clearTimeout(timer);
-    }, [onLoadingComplete]);
-
-    return (
-        <LoadingWrapper>
-            <FadeInWrapper>
-                <TypewriterText>
-                    Welcome to my portfolio!
-                </TypewriterText>
-            </FadeInWrapper>
-        </LoadingWrapper>
-    );
+  return (
+    <LoadingWrapper>
+      <FadeInWrapper>
+        <TypewriterText>
+          Welcome to my portfolio!
+        </TypewriterText>
+      </FadeInWrapper>
+    </LoadingWrapper>
+  );
 };
 
 export default LoadingScreen;
