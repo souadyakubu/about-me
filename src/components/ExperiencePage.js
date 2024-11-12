@@ -213,7 +213,7 @@ const ExperienceCard = ({ type, experiences }) => {
   const [currentIndex, setCurrentIndex] = useState(0);
 
   useEffect(() => {
-    const timer = setTimeout(() => setIsFlipped(true), 2500);
+    const timer = setTimeout(() => setIsFlipped(true), 3500);
     return () => clearTimeout(timer);
   }, [currentIndex]);
 
