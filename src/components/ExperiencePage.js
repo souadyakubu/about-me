@@ -146,7 +146,7 @@ const experiences = {
   workExperience: [
     {
       title: "Software Engineer",
-      subtitle: "Blvck Sapphire shjfbvjslhdvcasdvhsdlsd| Remote | April 2023 - Present",
+      subtitle: "Blvck Sapphire(provides AI technologies to businesses/organizations)| Remote | April 2023 - Present",
       details: [
         "Develop server-side logic, database integration, APIs, and user interfaces, ensuring software reliability.",
         "Design, develop, and maintain AI software applications with facial recognition features.",

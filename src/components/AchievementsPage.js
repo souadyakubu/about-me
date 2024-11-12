@@ -81,7 +81,7 @@ const Particle = styled(motion.div)`
 const achievements = [
     {
         title: "Collegiate Honors Student",
-        description: "Recognized for outstanding academic performance and dedication to excellence."
+        description: "Honored for exceptional academic achievement and steadfast commitment to community engagement and excellence."
     },
     {
         title: "Research Paper Co-author",
