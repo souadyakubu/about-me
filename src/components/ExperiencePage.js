@@ -9,7 +9,7 @@ const ExperiencePageWrapper = styled(motion.div)`
 background-color: #0a0a1f;
   min-height: 100vh;
   padding: 40px;
-font-family: 'Courier New', monospace;
+  font-family: 'Courier New', monospace;
   color: #e0e0e0;
   display: flex;
   flex-direction: column;
@@ -62,8 +62,9 @@ const FirstCardContainer = styled.div`
 const CardWrapper = styled.div`
   width: 100%;
   height: 400px;
-  
+  perspective: 1000px;
 `;
+
 
 const Card = styled.div`
   width: 100%;
@@ -75,16 +76,17 @@ const Card = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-   overflow-y: auto;
-  
+
 `;
 
 const CardFront = styled(Card)`
   background-color: #0f3460;
+  backface-visibility: hidden;
 `;
 
 const CardBack = styled(Card)`
   background-color: #16213e;
+  backface-visibility: hidden;
 `;
 
 const Title = styled.h2`
@@ -211,23 +213,20 @@ const ExperienceCard = ({ type, experiences }) => {
   const [currentIndex, setCurrentIndex] = useState(0);
 
   useEffect(() => {
-    const timer = setTimeout(() => setIsFlipped(true), 1000);
+    const timer = setTimeout(() => setIsFlipped(true), 2500);
     return () => clearTimeout(timer);
   }, [currentIndex]);
 
   const handleNext = () => {
     setIsFlipped(false);
-    setTimeout(() => {
-      setCurrentIndex((prevIndex) => (prevIndex + 1) % experiences.length);
-    }, 300); // Wait for the flip animation to complete before changing the index
+    setCurrentIndex((prevIndex) => (prevIndex + 1) % experiences.length);
   };
 
   const handlePrevious = () => {
     setIsFlipped(false);
-    setTimeout(() => {
-      setCurrentIndex((prevIndex) => (prevIndex - 1 + experiences.length) % experiences.length);
-    }, 300); // Wait for the flip animation to complete before changing the index
+    setCurrentIndex((prevIndex) => (prevIndex - 1 + experiences.length) % experiences.length);
   };
+
   const currentExperience = experiences[currentIndex];
 
   return (
@@ -255,7 +254,6 @@ const ExperienceCard = ({ type, experiences }) => {
     </div>
   );
 };
-
 const ExperiencePage = () => {
   return (
     <ExperiencePageWrapper>
@@ -266,7 +264,7 @@ const ExperiencePage = () => {
       >
       </Header>
 
-      <NavigationMenu /> {/* Add the NavigationMenu here */}
+      <NavigationMenu />
       <BackArrow to="/introduction">←</BackArrow>
       <ForwardArrow to="/pet-projects">→</ForwardArrow>
       <Header>My Experiences</Header>
