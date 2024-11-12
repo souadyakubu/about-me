@@ -126,7 +126,7 @@ const IntroductionPage = () => {
       setCurrentIndex(currentIndex + 1);
       setDisplayedAnswer("");
     } else {
-      // Navigate to the Experience page
+
       navigate('/experience');
     }
   };
@@ -139,7 +139,7 @@ const IntroductionPage = () => {
       typeAnswer(messages[currentIndex].answer); // Start typing effect for the answer
     }
 
-    // Clear the typing interval on component unmount or index change
+
     return () => clearInterval(typingIntervalRef.current);
   }, [currentIndex]);
 
@@ -152,10 +152,10 @@ const IntroductionPage = () => {
       index++;
 
       if (index === answer.length) {
-        clearInterval(typingIntervalRef.current); // Clear the interval once typing is done
-        setIsTyping(false); // Stop typing indicator once answer is fully displayed
+        clearInterval(typingIntervalRef.current);
+        setIsTyping(false);
       }
-    }, 10); // Adjust speed as needed
+    }, 30);
   };
 
   return (
@@ -165,7 +165,7 @@ const IntroductionPage = () => {
       exit={{ opacity: 0 }}
       transition={{ duration: 0.5 }}
     >
-      <NavigationMenu /> {/* Add the Navigation Menu here */}
+      <NavigationMenu />
       <BackArrow to="/">←</BackArrow>
       <ForwardArrow to="/experience">→</ForwardArrow>
       <ChatContainer>

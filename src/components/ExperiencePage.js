@@ -41,7 +41,7 @@ const Header = styled(motion.h1)`
   text-align: center;
   margin-bottom: 40px;
   font-size: 3rem;
-  text-shadow: 0 0 10px rgba(76, 201, 240, 0.5);
+  
 `;
 
 const CardsContainer = styled.div`

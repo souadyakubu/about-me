@@ -41,7 +41,7 @@ const Header = styled(motion.h1)`
   text-align: center;
   margin-bottom: 40px;
   font-size: 3rem;
-  text-shadow: 0 0 10px rgba(76, 201, 240, 0.5);
+
 `;
 
 const ProjectContainer = styled(motion.div)`
@@ -165,7 +165,7 @@ const PetProjectPage = () => {
             variants={pageVariants}
             transition={pageTransition}
         >
-            <NavigationMenu /> {/* Add the NavigationMenu here */}
+            <NavigationMenu />
             <BackArrow to="/experience"
                 whileHover={{ scale: 1.2, rotate: -10 }}
                 whileTap={{ scale: 0.8 }}
