@@ -30,7 +30,7 @@ const NavigationArrow = styled(Link)`
 `;
 
 const BackArrow = styled(NavigationArrow)` left: 20px; `;
-const ForwardArrow = styled(NavigationArrow)` right: 20px; `;
+
 
 const ChatContainer = styled.div`
    width: 100%; 
@@ -166,8 +166,8 @@ const IntroductionPage = () => {
       transition={{ duration: 0.5 }}
     >
       <NavigationMenu />
-      <BackArrow to="/">←</BackArrow>
-      <ForwardArrow to="/experience">→</ForwardArrow>
+      <BackArrow to="/home">←</BackArrow>
+
       <ChatContainer>
         <Question>{messages[currentIndex].question}</Question>
         <Answer>

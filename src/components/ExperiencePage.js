@@ -196,14 +196,7 @@ const experiences = {
         "Participated in community clean up services"
       ]
     },
-    {
-      title: " Executive member",
-      subtitle: "Beautiful foundation| Accra, Ghana | December 2021 - August 2023",
-      details: [
 
-        "Participated in the collection and donation clothes, books, food, drinks, toiletries, drinking water, and stationeries to the disability homes and local communities."
-      ]
-    }
   ],
 
 };
@@ -265,8 +258,8 @@ const ExperiencePage = () => {
       </Header>
 
       <NavigationMenu />
-      <BackArrow to="/introduction">←</BackArrow>
-      <ForwardArrow to="/pet-projects">→</ForwardArrow>
+      <BackArrow to="/home">←</BackArrow>
+      <ForwardArrow to="/introduction">→</ForwardArrow>
       <Header>My Experiences</Header>
       <CardsContainer>
         <FirstCardContainer>

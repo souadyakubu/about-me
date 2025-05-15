@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
 import { motion, useAnimation } from 'framer-motion';
+import { useNavigate } from 'react-router-dom';
 
 const StartPageWrapper = styled(motion.div)`
   display: flex;
@@ -9,63 +10,67 @@ const StartPageWrapper = styled(motion.div)`
   align-items: center;
   height: 100vh;
   background-color: #0a0a1f;
-  color: #ffffff; 
+  color: #ffffff;
   overflow: hidden;
 `;
 
 const Title = styled(motion.h1)`
-  font-size: 2.5rem; 
-  margin-bottom: 1rem; 
+  font-size: 2.5rem;
+  margin-bottom: 1rem;
   text-align: center;
-  font-family: 'Courier New', monospace; 
+  font-family: 'Courier New', monospace;
   text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.5);
 `;
 
 const InteractiveArea = styled(motion.div)`
   width: 300px;
   height: 300px;
-  background: linear-gradient(45deg, #007bff, #00aaff); 
+  background: linear-gradient(45deg, #007bff, #00aaff);
   border-radius: 50%;
   display: flex;
   justify-content: center;
   align-items: center;
   cursor: pointer;
+  user-select: none;
 `;
 
 const StartText = styled(motion.span)`
-  font-size: 2.0rem;
+  font-size: 2rem;
   font-weight: bold;
 `;
 
-const messages = [
-    "Click me!",
-    "Get started!"
-];
+const messages = ["Get started!"];
 
-
-
-const StartPage = ({ onStartComplete }) => {
+const StartPage = () => {
     const [interactionCount, setInteractionCount] = useState(0);
+    const [isExiting, setIsExiting] = useState(false);
     const controls = useAnimation();
+    const navigate = useNavigate();
 
     const handleInteraction = async () => {
         await controls.start({ scale: 0.9, transition: { duration: 0.1 } });
         await controls.start({ scale: 1, transition: { type: 'spring', stiffness: 300, damping: 10 } });
-        setInteractionCount(prev => prev + 1);
+        setInteractionCount((prev) => prev + 1);
     };
 
     useEffect(() => {
         if (interactionCount >= messages.length) {
-            setTimeout(onStartComplete, 500);
+            // Trigger exit animation
+            setIsExiting(true);
+            const timer = setTimeout(() => {
+                navigate('/home'); // adjust as needed
+            }, 1200); // delay navigation for smoothness
+            return () => clearTimeout(timer);
         }
-    }, [interactionCount, onStartComplete]);
+    }, [interactionCount, navigate]);
 
     return (
         <StartPageWrapper
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
-            transition={{ duration: 0.5 }}
+            transition={{ duration: 0.8 }}
+            style={{ opacity: isExiting ? 0 : 1, transition: 'opacity 1s ease' }} // Smooth fade out
         >
             <Title
                 initial={{ y: -50, opacity: 0 }}
@@ -74,11 +79,7 @@ const StartPage = ({ onStartComplete }) => {
             >
                 Get to Know Me
             </Title>
-            <InteractiveArea
-                animate={controls}
-                whileHover={{ scale: 1.05 }}
-                onClick={handleInteraction}
-            >
+            <InteractiveArea animate={controls} whileHover={{ scale: 1.05 }} onClick={handleInteraction}>
                 <StartText>
                     {interactionCount < messages.length ? messages[interactionCount] : "Let's go!"}
                 </StartText>

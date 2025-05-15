@@ -8,7 +8,7 @@ const AchievementsPageWrapper = styled(motion.div)`
   background-color: #0a0a1f;
   min-height: 100vh;
   padding: 40px;
-font-family: 'Courier New', monospace;
+  font-family: 'Courier New', monospace;
   color: #e0e0e0;
   display: flex;
   flex-direction: column;
@@ -32,13 +32,13 @@ const NavigationArrow = styled(Link)`
 const BackArrow = styled(NavigationArrow)`
   left: 20px;
 `;
+const ForwardArrow = styled(NavigationArrow)` right: 20px; `;
 
 const Header = styled(motion.h1)`
   color: #4cc9f0;
   text-align: center;
   margin-bottom: 40px;
   font-size: 3rem;
-
 `;
 
 const AchievementContainer = styled(motion.div)`
@@ -72,6 +72,18 @@ const AchievementDescription = styled.p`
   font-size: 1rem;
 `;
 
+const AchievementLink = styled.a`
+  color: #4cc9f0;
+  text-decoration: none;
+  display: inline-block;
+  margin-top: 8px;
+  font-style: italic;
+  &:hover {
+    text-decoration: underline;
+    color: #3a9fc0;
+  }
+`;
+
 const Particle = styled(motion.div)`
   position: absolute;
   background-color: #4cc9f0;
@@ -81,19 +93,21 @@ const Particle = styled(motion.div)`
 const achievements = [
     {
         title: "Collegiate Honors Student",
-        description: "Honored for exceptional academic achievement and steadfast commitment to community engagement and excellence."
+        description: "Recognized for maintaining a 3.9 GPA while actively participating in student government, academic clubs, and extensive community engagement initiatives. Demonstrated outstanding leadership skills through coordinating volunteer programs and mentoring fellow students, earning commendation for balancing academic excellence with meaningful extracurricular involvement."
     },
     {
         title: "Research Paper Co-author",
-        description: "Co-authored a research paper titled 'Towards Full Authorship with AI: Supporting Revision with AI-Generated Views', accepted for presentation at the HAI-GEN 2024 conference."
+        description: "Co-authored a research paper titled 'Towards Full Authorship with AI: Supporting Revision with AI-Generated Views', accepted for presentation at the HAI-GEN 2024 conference. The paper introduces Textfocals, a UI prototype that maintains user autonomy in writing by providing AI-generated insights rather than direct text generation, encouraging thoughtful self-revision.",
+        link: "https://hai-gen.github.io/2024/papers/9904-Kim.pdf"
     },
     {
         title: "Most Creative Award - Hackathon 2024",
-        description: "Demonstrated exceptional creativity and innovation in problem-solving during the hackathon."
+        description: "Demonstrated creativity and innovation during the hackathon by developing an Accessible Voice Assistant solution that addresses accessibility challenges.",
+        projectRef: true
     },
     {
         title: "Leadership Award – Girls Who Code",
-        description: "Recognized for outstanding mentorship and leadership in Girls Who Code, empowering girls with coding and leadership skills."
+        description: "Recognized for outstanding mentorship and leadership in Girls Who Code, where I lead dynamic coding workshops for young women, I was able to ignite their passion for technology by empowering them to develop their own applications."
     }
 ];
 
@@ -107,8 +121,9 @@ const AchievementsPage = () => {
             exit={{ opacity: 0 }}
             transition={{ duration: 0.5 }}
         >
-            <NavigationMenu /> {/* Add the NavigationMenu here */}
-            <BackArrow to="/pet-projects">←</BackArrow>
+            <NavigationMenu />
+            <BackArrow to="/home">←</BackArrow>
+            <ForwardArrow to="/experience">→</ForwardArrow>
             <Header
                 initial={{ y: -50, opacity: 0 }}
                 animate={{ y: 0, opacity: 1 }}
@@ -139,6 +154,16 @@ const AchievementsPage = () => {
                         >
                             <AchievementTitle>{achievement.title}</AchievementTitle>
                             <AchievementDescription>{achievement.description}</AchievementDescription>
+                            {achievement.link && (
+                                <AchievementLink href={achievement.link} target="_blank" rel="noopener noreferrer">
+                                    Read the paper →
+                                </AchievementLink>
+                            )}
+                            {achievement.projectRef && (
+                                <AchievementLink as={Link} to="/projects/voice-assistant">
+                                    View project details →
+                                </AchievementLink>
+                            )}
                         </AchievementCard>
                     ))}
                 </AnimatePresence>
@@ -165,6 +190,16 @@ const AchievementsPage = () => {
                         <AchievementCard style={{ width: "80%", maxWidth: "600px" }}>
                             <AchievementTitle>{achievements[selectedAchievement].title}</AchievementTitle>
                             <AchievementDescription>{achievements[selectedAchievement].description}</AchievementDescription>
+                            {achievements[selectedAchievement].link && (
+                                <AchievementLink href={achievements[selectedAchievement].link} target="_blank" rel="noopener noreferrer">
+                                    Read the paper →
+                                </AchievementLink>
+                            )}
+                            {achievements[selectedAchievement].projectRef && (
+                                <AchievementLink as={Link} to="/projects/accessible-voice-assistant">
+                                    View project details →
+                                </AchievementLink>
+                            )}
                         </AchievementCard>
                     </motion.div>
                 )}

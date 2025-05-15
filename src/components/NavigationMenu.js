@@ -45,11 +45,13 @@ const NavigationMenu = () => {
     <MenuContainer onMouseLeave={() => setIsOpen(false)}>
       <MenuButton onMouseEnter={() => setIsOpen(true)}>☰</MenuButton>
       <DropdownMenu isOpen={isOpen}>
-        <MenuItem to="/">Home</MenuItem>
-        <MenuItem to="/introduction">Introduction</MenuItem>
-        <MenuItem to="/experience">Experience</MenuItem>
-        <MenuItem to="/pet-projects">Pet Projects</MenuItem>
+        <MenuItem to="/home">Home</MenuItem>
+        <MenuItem to="/projects">Projects</MenuItem>
         <MenuItem to="/achievements">Achievements</MenuItem>
+        <MenuItem to="/experience">Experience</MenuItem>
+        <MenuItem to="/introduction">Learn about me</MenuItem>
+
+
       </DropdownMenu>
     </MenuContainer>
   );
