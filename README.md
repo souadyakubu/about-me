@@ -15,13 +15,17 @@ Welcome to my personal developer portfolio! This is a living story of my journey
 
 
 ## ⚙️ Tech Stack
-Technology	Purpose
-React	Frontend UI
-React Router	Multi-page navigation
-Styled-Components	Component-level styling
-Framer Motion	Smooth animations & effects
-JavaScript	Dynamic interactions
-Git + GitHub	Version control
+React – Handles the structure and interactivity of the user interface.
+React Router – Enables smooth multi-page navigation across the app.
+Styled-Components – Provides scoped, component-level styling using CSS-in-JS.
+Framer Motion – Adds fluid animations and transitions for a polished user experience.
+JavaScript – Powers the dynamic behavior and logic of the app.
+Git & GitHub – Used for version control, collaboration, and code management.
+
+
+## 🚀 Deployment
+* Firebase Hosting – Fast and secure static site hosting with global CDN.
+* Vercel – Instant deployment with CI/CD and great support for React-based apps.
 
 
 ## 🧠 Inspiration & Purpose
