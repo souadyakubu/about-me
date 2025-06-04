@@ -91,7 +91,7 @@ const ProjectCard = styled(motion(Link))`
     }
 
     &:hover:before {
-      animation: shine 0.9s forwards;
+    
       opacity: 1;
     }
   }
