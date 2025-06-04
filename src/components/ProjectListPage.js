@@ -67,7 +67,6 @@ const ProjectCard = styled(motion(Link))`
   transition: box-shadow 0.3s ease;
 
   &:hover {
-    box-shadow: 0 10px 25px rgba(76, 201, 240, 0.6);
     position: relative;
     overflow: hidden;
 
