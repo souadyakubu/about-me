@@ -8,7 +8,7 @@ const LoadingWrapper = styled(motion.div)`
   align-items: center;
   height: 100vh;
   width: 100vw;
-   background-color: #0a0a1f;
+  background-color: #0a0a1f;
   color: #ffffff;
 `;
 
@@ -32,10 +32,15 @@ const Cursor = styled.span`
   }
 `;
 
+// Main LoadingScreen component that types out a welcome message letter by letter
 const LoadingScreen = ({ onLoadingComplete }) => {
+  // State to track the currently displayed portion of the full text
   const [displayedText, setDisplayedText] = useState('');
+
+  // The complete welcome message to be typed out
   const fullText = "Welcome to my portfolio!";
 
+  // Callback to add one more character to displayedText at a time
   const typeNextCharacter = useCallback(() => {
     setDisplayedText(prev => {
       if (prev.length < fullText.length) {
@@ -45,17 +50,22 @@ const LoadingScreen = ({ onLoadingComplete }) => {
     });
   }, [fullText]);
 
+  // useEffect handles the typing interval and triggers the callback once typing is complete
   useEffect(() => {
+    // When all text is displayed, call the provided completion handler after a short delay
     if (displayedText.length === fullText.length) {
       setTimeout(onLoadingComplete, 500);
       return;
     }
 
+    // Otherwise set a timeout to type the next character
     const typingTimeout = setTimeout(typeNextCharacter, 100);
 
+    // Clean up the timeout to prevent memory leaks or unexpected behavior
     return () => clearTimeout(typingTimeout);
   }, [displayedText, fullText, onLoadingComplete, typeNextCharacter]);
 
+  // Render the animated loading screen with the typewriter text
   return (
     <LoadingWrapper
       initial={{ opacity: 1 }}

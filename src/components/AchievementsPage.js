@@ -29,9 +29,7 @@ const NavigationArrow = styled(Link)`
   }
 `;
 
-const BackArrow = styled(NavigationArrow)`
-  left: 20px;
-`;
+const BackArrow = styled(NavigationArrow)` left: 20px; `;
 const ForwardArrow = styled(NavigationArrow)` right: 20px; `;
 
 const Header = styled(motion.h1)`
@@ -49,6 +47,7 @@ const AchievementContainer = styled(motion.div)`
   max-width: 800px;
 `;
 
+// Each individual achievement is displayed in this card
 const AchievementCard = styled(motion.div)`
   background: rgba(22, 33, 62, 0.8);
   border-radius: 15px;
@@ -84,35 +83,38 @@ const AchievementLink = styled.a`
   }
 `;
 
+// Animated particle used for a dynamic background effect
 const Particle = styled(motion.div)`
   position: absolute;
   background-color: #4cc9f0;
   border-radius: 50%;
 `;
 
+// Array of achievement objects to render dynamically
 const achievements = [
     {
         title: "Collegiate Honors Student",
-        description: "Recognized for maintaining a 3.9 GPA while actively participating in student government, academic clubs, and extensive community engagement initiatives. Demonstrated outstanding leadership skills through coordinating volunteer programs and mentoring fellow students, earning commendation for balancing academic excellence with meaningful extracurricular involvement."
+        description: "Recognized for maintaining a 3.9 GPA while actively participating in student government, academic clubs, and extensive community engagement initiatives..."
     },
     {
         title: "Research Paper Co-author",
-        description: "Co-authored a research paper titled 'Towards Full Authorship with AI: Supporting Revision with AI-Generated Views', accepted for presentation at the HAI-GEN 2024 conference. The paper introduces Textfocals, a UI prototype that maintains user autonomy in writing by providing AI-generated insights rather than direct text generation, encouraging thoughtful self-revision.",
+        description: "Co-authored a research paper titled 'Towards Full Authorship with AI...' accepted for HAI-GEN 2024.",
         link: "https://hai-gen.github.io/2024/papers/9904-Kim.pdf"
     },
     {
         title: "Most Creative Award - Hackathon 2024",
-        description: "Demonstrated creativity and innovation during the hackathon by developing an Accessible Voice Assistant solution that addresses accessibility challenges.",
+        description: "Developed an Accessible Voice Assistant solution that addresses accessibility challenges.",
         projectRef: true
     },
     {
         title: "Leadership Award – Girls Who Code",
-        description: "Recognized for outstanding mentorship and leadership in Girls Who Code, where I lead dynamic coding workshops for young women, I was able to ignite their passion for technology by empowering them to develop their own applications."
+        description: "Recognized for outstanding mentorship and leadership in Girls Who Code..."
     }
 ];
 
+
 const AchievementsPage = () => {
-    const [selectedAchievement, setSelectedAchievement] = useState(null);
+    const [selectedAchievement, setSelectedAchievement] = useState(null); // Track which card is currently expanded
 
     return (
         <AchievementsPageWrapper
@@ -124,6 +126,7 @@ const AchievementsPage = () => {
             <NavigationMenu />
             <BackArrow to="/home">←</BackArrow>
             <ForwardArrow to="/experience">→</ForwardArrow>
+
             <Header
                 initial={{ y: -50, opacity: 0 }}
                 animate={{ y: 0, opacity: 1 }}
@@ -131,6 +134,8 @@ const AchievementsPage = () => {
             >
                 Achievements
             </Header>
+
+            {/* Display all achievements */}
             <AchievementContainer>
                 <AnimatePresence>
                     {achievements.map((achievement, index) => (
@@ -154,11 +159,15 @@ const AchievementsPage = () => {
                         >
                             <AchievementTitle>{achievement.title}</AchievementTitle>
                             <AchievementDescription>{achievement.description}</AchievementDescription>
+
+                            {/* Conditional rendering for external link */}
                             {achievement.link && (
                                 <AchievementLink href={achievement.link} target="_blank" rel="noopener noreferrer">
                                     Read the paper →
                                 </AchievementLink>
                             )}
+
+                            {/* Conditional rendering for internal project link */}
                             {achievement.projectRef && (
                                 <AchievementLink as={Link} to="/projects/voice-assistant">
                                     View project details →
@@ -169,6 +178,7 @@ const AchievementsPage = () => {
                 </AnimatePresence>
             </AchievementContainer>
 
+            {/* Expanded view of a selected achievement */}
             <AnimatePresence>
                 {selectedAchievement !== null && (
                     <motion.div
@@ -185,16 +195,18 @@ const AchievementsPage = () => {
                             justifyContent: "center",
                             zIndex: 1000
                         }}
-                        onClick={() => setSelectedAchievement(null)}
+                        onClick={() => setSelectedAchievement(null)} // Clicking the overlay closes it
                     >
                         <AchievementCard style={{ width: "80%", maxWidth: "600px" }}>
                             <AchievementTitle>{achievements[selectedAchievement].title}</AchievementTitle>
                             <AchievementDescription>{achievements[selectedAchievement].description}</AchievementDescription>
+
                             {achievements[selectedAchievement].link && (
                                 <AchievementLink href={achievements[selectedAchievement].link} target="_blank" rel="noopener noreferrer">
                                     Read the paper →
                                 </AchievementLink>
                             )}
+
                             {achievements[selectedAchievement].projectRef && (
                                 <AchievementLink as={Link} to="/projects/accessible-voice-assistant">
                                     View project details →

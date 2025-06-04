@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
 
-// Fun floating background circle
+// These are animated background shapes that gently float to add a sense of life and motion to the page.
 const FloatingCircle = styled(motion.div)`
   position: absolute;
   top: 10%;
@@ -13,7 +13,7 @@ const FloatingCircle = styled(motion.div)`
   background: radial-gradient(circle, #00aaff 60%, transparent 100%);
   border-radius: 50%;
   z-index: 0;
-  pointer-events: none;
+  pointer-events: none; // Prevents interfering with user clicks
   opacity: 0.5;
 `;
 
@@ -30,6 +30,7 @@ const FloatingSquare = styled(motion.div)`
   opacity: 0.5;
 `;
 
+// Sets layout, font, background, and overall page structure.
 const PageWrapper = styled(motion.div)`
   display: flex;
   flex-direction: column;
@@ -43,6 +44,7 @@ const PageWrapper = styled(motion.div)`
   overflow: hidden;
 `;
 
+// Wraps and organizes the page section links in a clean vertical grid layout.
 const SectionList = styled.div`
   display: grid;
   grid-template-columns: 1fr;
@@ -53,6 +55,7 @@ const SectionList = styled.div`
   z-index: 1;
 `;
 
+// Each link is styled like a button with gradients, animations, and shadows.
 const SectionLink = styled(motion(Link))`
   padding: 1rem 1.5rem;
   background: linear-gradient(45deg, #007bff, #00aaff);
@@ -74,11 +77,13 @@ const SectionLink = styled(motion(Link))`
   }
 `;
 
+// Adds an emoji next to each link label for a fun, approachable feel.
 const Emoji = styled.span`
   margin-right: 0.75rem;
   font-size: 1.5rem;
 `;
 
+// Displays email and LinkedIn info with clean styling and background box.
 const ContactInfo = styled.div`
   margin-top: 3rem;
   font-size: 1rem;
@@ -91,6 +96,7 @@ const ContactInfo = styled.div`
   box-shadow: 0 2px 16px rgba(0,0,0,0.1);
 `;
 
+// Rotating sparkle emoji adds a magical welcome animation in the header.
 const Sparkle = styled(motion.span)`
   color: #ffe066;
   font-size: 1.5rem;
@@ -98,6 +104,7 @@ const Sparkle = styled(motion.span)`
   vertical-align: middle;
 `;
 
+// This is the actual functional component rendered by the router.
 const NavigationPage = () => {
     return (
         <PageWrapper
@@ -106,7 +113,7 @@ const NavigationPage = () => {
             exit={{ opacity: 0, y: -30 }}
             transition={{ duration: 0.7 }}
         >
-            {/* Fun animated background elements */}
+            {/* Floating background shapes to add visual interest */}
             <FloatingCircle
                 animate={{ y: [0, 30, 0] }}
                 transition={{ repeat: Infinity, duration: 6, ease: "easeInOut" }}
@@ -116,7 +123,7 @@ const NavigationPage = () => {
                 transition={{ repeat: Infinity, duration: 7, ease: "easeInOut" }}
             />
 
-            {/* Animated heading */}
+            {/* Welcome message with animated sparkle */}
             <motion.h1
                 initial={{ scale: 0.8, opacity: 0 }}
                 animate={{ scale: 1, opacity: 1 }}
@@ -134,6 +141,7 @@ const NavigationPage = () => {
                 </Sparkle>
             </motion.h1>
 
+            {/* Navigation Links to different pages */}
             <SectionList>
                 <SectionLink
                     to="/projects"
@@ -163,11 +171,9 @@ const NavigationPage = () => {
                 >
                     <Emoji>👋</Emoji>Learn about me
                 </SectionLink>
-
-
-
             </SectionList>
 
+            {/* Animated contact section at the bottom */}
             <motion.div
                 initial={{ opacity: 0, y: 40 }}
                 animate={{ opacity: 1, y: 0 }}
@@ -189,7 +195,7 @@ const NavigationPage = () => {
                             rel="noopener noreferrer"
                             style={{ color: "#00aaff", fontWeight: "bold" }}
                         >
-                            inkedin.com/in/souad-yakubu
+                            linkedin.com/in/souad-yakubu
                         </a>
                     </p>
                 </ContactInfo>

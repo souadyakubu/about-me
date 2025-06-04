@@ -5,10 +5,10 @@ import { Link } from 'react-router-dom';
 import NavigationMenu from './NavigationMenu';
 
 const PetProjectPageWrapper = styled(motion.div)`
-background-color: #0a0a1f;
+  background-color: #0a0a1f;
   min-height: 100vh;
   padding: 40px;
-font-family: 'Courier New', monospace;
+  font-family: 'Courier New', monospace;
   color: #e0e0e0;
   display: flex;
   flex-direction: column;
@@ -28,20 +28,14 @@ const NavigationArrow = styled(motion(Link))`
   }
 `;
 
-const BackArrow = styled(NavigationArrow)`
-  left: 20px;
-`;
-
-const ForwardArrow = styled(NavigationArrow)`
-  right: 20px;
-`;
+const BackArrow = styled(NavigationArrow)` left: 20px; `;
+const ForwardArrow = styled(NavigationArrow)` right: 20px; `;
 
 const Header = styled(motion.h1)`
   color: #4cc9f0;
   text-align: center;
   margin-bottom: 40px;
   font-size: 3rem;
-
 `;
 
 const ProjectContainer = styled(motion.div)`
@@ -74,10 +68,13 @@ const LoadingTitle = styled(motion.h2)`
 `;
 
 const PetProjectPage = () => {
+    // State variables to manage loading, typing animation, and title display
     const [isLoading, setIsLoading] = useState(true);
     const [loadingIndex, setLoadingIndex] = useState(0);
     const [typedTitle, setTypedTitle] = useState('');
     const [isTitleTyped, setIsTitleTyped] = useState(false);
+
+    // List of projects to display
     const projects = [
         { title: "Accessible Voice Assistant", description: "Multilingual voice-activated assistant for the visually impaired using NLP and ML." },
         { title: "Budget App", description: "Full-stack budgeting application using React and Node.js with API integration." },
@@ -86,6 +83,7 @@ const PetProjectPage = () => {
         { title: "Readers Tool", description: "AI-powered tool enhancing the reading experience of classic Christian texts." },
     ];
 
+    // Typing effect for the title
     useEffect(() => {
         let typingTimeout;
         const fullTitle = "My Pet Projects";
@@ -93,6 +91,7 @@ const PetProjectPage = () => {
         const typeTitle = () => {
             let index = 0;
 
+            // Type each letter with a randomized speed
             const typeNextLetter = () => {
                 if (index < fullTitle.length) {
                     setTypedTitle(fullTitle.slice(0, index + 1));
@@ -111,12 +110,14 @@ const PetProjectPage = () => {
         return () => clearTimeout(typingTimeout);
     }, []);
 
+    // After title is typed show animated project titles one by one, then display all cards
     useEffect(() => {
         if (isTitleTyped) {
             const interval = setInterval(() => {
                 setLoadingIndex((prevIndex) => (prevIndex + 1) % projects.length);
             }, 500);
 
+            // Stop loading after cycling through each project title once
             setTimeout(() => {
                 clearInterval(interval);
                 setIsLoading(false);
@@ -126,6 +127,7 @@ const PetProjectPage = () => {
         }
     }, [isTitleTyped, projects.length]);
 
+    // Animation variants for page transitions and project cards
     const pageVariants = {
         initial: { opacity: 0 },
         in: { opacity: 1 },
@@ -151,10 +153,7 @@ const PetProjectPage = () => {
 
     const itemVariants = {
         hidden: { y: 20, opacity: 0 },
-        visible: {
-            y: 0,
-            opacity: 1
-        }
+        visible: { y: 0, opacity: 1 }
     };
 
     return (
@@ -187,7 +186,6 @@ const PetProjectPage = () => {
             >
                 {typedTitle}
             </Header>
-
             <AnimatePresence>
                 {isLoading && isTitleTyped ? (
                     <LoadingTitle
@@ -206,6 +204,7 @@ const PetProjectPage = () => {
                         initial="hidden"
                         animate="visible"
                     >
+                        {/* Render each project card with hover effects */}
                         {projects.map((project, index) => (
                             <ProjectCard
                                 key={index}
@@ -215,7 +214,7 @@ const PetProjectPage = () => {
                                     rotate: Math.random() * (5) - 2.5,
                                     boxShadow: "0px -2px rgba(76,201,240,.5)"
                                 }}
-                                whileTap={{ scale: .95 }}
+                                whileTap={{ scale: 0.95 }}
                             >
                                 <ProjectTitle>{project.title}</ProjectTitle>
                                 <ProjectDescription>{project.description}</ProjectDescription>

@@ -17,8 +17,6 @@ const PageWrapper = styled(motion.div)`
   align-items: center;
 `;
 
-
-
 const BackLink = styled(Link)`
   color: #4cc9f0;
   text-decoration: none;
@@ -67,9 +65,13 @@ const DetailsContainer = styled.div`
 `;
 
 const ProjectDetailPage = () => {
+  // Grab the project ID from the URL parameters
   const { id } = useParams();
+
+  // Find the project in the data array using the ID
   const project = projects.find(p => p.id === id);
 
+  // If no project is found, show a simple "not found" message
   if (!project) {
     return (
       <PageWrapper>
@@ -79,6 +81,7 @@ const ProjectDetailPage = () => {
     );
   }
 
+  // Otherwise render the project details with smooth fade-in animation
   return (
     <PageWrapper
       initial={{ opacity: 0 }}
@@ -87,8 +90,10 @@ const ProjectDetailPage = () => {
       transition={{ duration: 0.5 }}
     >
       <NavigationMenu />
+
       <BackLink to="/projects">←</BackLink>
       <Header>{project.title}</Header>
+
       <LinksRow>
         {project.github && (
           <StyledA href={project.github} target="_blank" rel="noopener noreferrer">

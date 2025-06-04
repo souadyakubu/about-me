@@ -1,6 +1,6 @@
 import React from 'react';
 import { ThemeProvider } from './contexts/ThemeContext';
-import LoadingScreen from './components/LoadingScreen';
+//import LoadingScreen from './components/LoadingScreen';
 import StartPage from './components/StartPage';
 import IntroductionPage from './components/IntroductionPage';
 import ExperiencePage from './components/ExperiencePage';

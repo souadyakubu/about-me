@@ -6,7 +6,7 @@ import { Link } from 'react-router-dom';
 import NavigationMenu from './NavigationMenu';
 
 const ExperiencePageWrapper = styled(motion.div)`
-background-color: #0a0a1f;
+  background-color: #0a0a1f;
   min-height: 100vh;
   padding: 40px;
   font-family: 'Courier New', monospace;
@@ -23,27 +23,24 @@ const NavigationArrow = styled(Link)`
   font-size: 24px;
   color: #4cc9f0;
   text-decoration: none;
+
   &:hover {
     color: #3a9fc0;
   }
 `;
 
-const BackArrow = styled(NavigationArrow)`
-  left: 20px;
-`;
+const BackArrow = styled(NavigationArrow)`left: 20px;`;
+const ForwardArrow = styled(NavigationArrow)`right: 20px;`;
 
-const ForwardArrow = styled(NavigationArrow)`
-  right: 20px;
-`;
-
+// Main page title 
 const Header = styled(motion.h1)`
   color: #4cc9f0;
   text-align: center;
   margin-bottom: 40px;
   font-size: 3rem;
-  
 `;
 
+// Container for flipping cards
 const CardsContainer = styled.div`
   display: flex;
   flex-direction: column;
@@ -51,21 +48,22 @@ const CardsContainer = styled.div`
   width: 100%;
   max-width: 600px;
   flex-grow: 1;
-justify-content: space-between; // This will push the cards apart
-
+  justify-content: space-between;
 `;
 
+// Adds spacing below the first card (in case of future expansion)
 const FirstCardContainer = styled.div`
-  margin-bottom: 100px; // Adjust this value as needed
+  margin-bottom: 100px;
 `;
 
+// Sets 3D perspective for flipping animation
 const CardWrapper = styled.div`
   width: 100%;
   height: 400px;
   perspective: 1000px;
 `;
 
-
+// Base card styling shared by front and back
 const Card = styled.div`
   width: 100%;
   height: 100%;
@@ -76,7 +74,6 @@ const Card = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-
 `;
 
 const CardFront = styled(Card)`
@@ -89,22 +86,24 @@ const CardBack = styled(Card)`
   backface-visibility: hidden;
 `;
 
+
 const Title = styled.h2`
   color: #4cc9f0;
   margin-bottom: 10px;
-  font-size: 1.5rem
+  font-size: 1.5rem;
 `;
-
 
 const Subtitle = styled.h3`
   color: #f0f0f0;
 `;
 
+// Container for bullet point details
 const Details = styled.ul`
   list-style-type: none;
   padding: 0;
 `;
 
+// Bullet styling for each experience detail
 const DetailItem = styled.li`
   margin-bottom: 10px;
 
@@ -129,26 +128,26 @@ const Button = styled.button`
   border: none;
   padding: 10px 20px;
   border-radius: 5px;
-  
-   cursor:pointer; 
-   font-size :16px; 
-   transition : background-color .3s;
+  cursor: pointer; 
+  font-size: 16px; 
+  transition: background-color 0.3s;
 
-   &:hover {
-      background-color :#3a9fc0; 
-   }
+  &:hover {
+    background-color: #3a9fc0; 
+  }
 
-   &:disabled {
-      background-color :#2a4a6a; 
-      cursor:not-allowed; 
-   }
+  &:disabled {
+    background-color: #2a4a6a; 
+    cursor: not-allowed; 
+  }
 `;
 
+// Array of experiences 
 const experiences = {
   workExperience: [
     {
       title: "Software Engineer",
-      subtitle: "Blvck Sapphire(provides AI technologies to businesses/organizations)| Remote | April 2023 - Present",
+      subtitle: "Blvck Sapphire (Remote) | April 2023 - Present",
       details: [
         "Develop server-side logic, database integration, APIs, and user interfaces, ensuring software reliability.",
         "Design, develop, and maintain AI software applications with facial recognition features.",
@@ -165,56 +164,54 @@ const experiences = {
     },
     {
       title: "Computer Science Chair",
-      subtitle: " National Society of Black Engineers| Grand Rapids, MI | May 2023 – Present",
+      subtitle: "National Society of Black Engineers | May 2023 – Present",
       details: [
-        "Lead and coordinate computer science initiatives, fostering educational growth and collaboration among members. Organized workshops, mentorship programs, and hackathons, resulting in increased member participation by over 25% and improved technical skill development"
+        "Led workshops, mentorships, and hackathons, increasing member participation by 25% and fostering technical growth."
       ]
     },
     {
-      title: "Girls Who Code Tutor and Mentor ",
-      subtitle: " Calvin University| Grand Rapids, MI | September 2023 – August 2024",
+      title: "Girls Who Code Tutor and Mentor",
+      subtitle: "Calvin University | September 2023 – August 2024",
       details: [
-        "Lead and coordinate computer science initiatives, fostering educational growth and collaboration among members. Organized workshops, mentorship programs, and hackathons, resulting in increased member participation by over 25% and improved technical skill development"
+        "Guided students in coding projects and problem-solving, encouraging confidence and technical fluency."
       ]
     },
     {
       title: "Research Intern",
-      subtitle: " Calvin University | Grand Rapids, MI | August 2023 – December 2023",
+      subtitle: "Calvin University | August 2023 – December 2023",
       details: [
-        "Led dynamic coding workshops empowering young women to develop their own applications, fostering expertise in software engineering fundamentals and nurturing inventive problem-solving skills.",
-        "Facilitated hands-on project development sessions, fostering fluency in various programming languages and facilitating collaborative app-building projects to cultivate teamwork and innovation."
+        "Facilitated workshops and coding sessions, helping students master programming skills and build real-world apps."
       ]
     },
     {
       title: "Co-founder",
-      subtitle: "S & S foundation (Souad & Seli)| Accra, Ghana| September 2020 - Present",
+      subtitle: "S & S Foundation | Accra, Ghana | September 2020 - Present",
       details: [
-        "Co-founder of S&S foundation",
-        "Donated stationery, exercise books, and mathematical sets to schools in remote parts of the country.",
-        "Participated in cooking food to feed about200 people on the street.",
-        "Organized the collection and donation of clothes to the orphanage",
-        "Participated in community clean up services"
+        "Organized donation drives for schools and orphanages.",
+        "Prepared meals for over 200 people and led community clean-up initiatives."
       ]
-    },
-
+    }
   ],
-
 };
 
-const ExperienceCard = ({ type, experiences }) => {
-  const [isFlipped, setIsFlipped] = useState(false);
-  const [currentIndex, setCurrentIndex] = useState(0);
 
+const ExperienceCard = ({ type, experiences }) => {
+  const [isFlipped, setIsFlipped] = useState(false); // Controls whether the card is showing front or back
+  const [currentIndex, setCurrentIndex] = useState(0); // Tracks which experience to show
+
+  // Automatically flips 
   useEffect(() => {
     const timer = setTimeout(() => setIsFlipped(true), 3500);
     return () => clearTimeout(timer);
   }, [currentIndex]);
 
+  // Move to the next experience card
   const handleNext = () => {
     setIsFlipped(false);
     setCurrentIndex((prevIndex) => (prevIndex + 1) % experiences.length);
   };
 
+  // Go back to the previous experience card
   const handlePrevious = () => {
     setIsFlipped(false);
     setCurrentIndex((prevIndex) => (prevIndex - 1 + experiences.length) % experiences.length);
@@ -225,7 +222,12 @@ const ExperienceCard = ({ type, experiences }) => {
   return (
     <div>
       <CardWrapper>
-        <ReactCardFlip isFlipped={isFlipped} flipDirection="horizontal" flipSpeedBackToFront={0.6} flipSpeedFrontToBack={0.6}>
+        <ReactCardFlip
+          isFlipped={isFlipped}
+          flipDirection="horizontal"
+          flipSpeedBackToFront={0.6}
+          flipSpeedFrontToBack={0.6}
+        >
           <CardFront>
             <Title>{currentExperience.title}</Title>
             <Subtitle>{currentExperience.subtitle}</Subtitle>
@@ -240,6 +242,8 @@ const ExperienceCard = ({ type, experiences }) => {
           </CardBack>
         </ReactCardFlip>
       </CardWrapper>
+
+      {/* Navigation buttons to cycle through cards */}
       <NavigationButtons>
         <Button onClick={handlePrevious}>Previous</Button>
         <Button onClick={handleNext}>Next</Button>
@@ -247,6 +251,7 @@ const ExperienceCard = ({ type, experiences }) => {
     </div>
   );
 };
+
 const ExperiencePage = () => {
   return (
     <ExperiencePageWrapper>
@@ -254,16 +259,21 @@ const ExperiencePage = () => {
         initial={{ y: -50, opacity: 0 }}
         animate={{ y: 0, opacity: 1 }}
         transition={{ delay: 0.2, type: "spring", stiffness: 120 }}
-      >
-      </Header>
-
+      />
       <NavigationMenu />
+
       <BackArrow to="/home">←</BackArrow>
       <ForwardArrow to="/introduction">→</ForwardArrow>
+
       <Header>My Experiences</Header>
+
+      {/* Container holding all the flipping cards */}
       <CardsContainer>
         <FirstCardContainer>
-          <ExperienceCard type="Work Experience" experiences={experiences.workExperience} />
+          <ExperienceCard
+            type="Work Experience"
+            experiences={experiences.workExperience}
+          />
         </FirstCardContainer>
       </CardsContainer>
     </ExperiencePageWrapper>

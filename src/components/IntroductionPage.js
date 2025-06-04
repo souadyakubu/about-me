@@ -9,7 +9,7 @@ const IntroductionPageWrapper = styled(motion.div)`
   flex-direction: column;
   align-items: center;
   height: 100vh;
- background-color: #0a0a1f;
+  background-color: #0a0a1f;
   color: #ffffff;
   overflow: hidden;
   padding: 5px;
@@ -18,24 +18,23 @@ const IntroductionPageWrapper = styled(motion.div)`
 `;
 
 const NavigationArrow = styled(Link)`
-   position: absolute; 
-   top: 20px; 
-   font-size: 24px; 
-   color: #4cc9f0; 
-   text-decoration: none; 
+  position: absolute;
+  top: 20px;
+  font-size: 24px;
+  color: #4cc9f0;
+  text-decoration: none;
 
-   &:hover { 
-       color: #3a9fc0; 
-   } 
+  &:hover {
+    color: #3a9fc0;
+  }
 `;
 
 const BackArrow = styled(NavigationArrow)` left: 20px; `;
 
-
 const ChatContainer = styled.div`
-   width: 100%; 
-   max-width: 600px; 
-   margin: auto; 
+  width: 100%;
+  max-width: 600px;
+  margin: auto;
 `;
 
 const Message = styled(motion.div)`
@@ -83,7 +82,6 @@ const Answer = styled(Message)`
 
 const TypingIndicator = styled.span`
   font-style: 'Courier New', monospace;
-
 `;
 
 const ContinueButton = styled.button`
@@ -96,7 +94,7 @@ const ContinueButton = styled.button`
   border: none;
   border-radius: 5px;
   cursor: pointer;
-  margin-bottom: 20px; 
+  margin-bottom: 20px;
 
   &:hover {
     background-color: #0056b3;
@@ -104,58 +102,62 @@ const ContinueButton = styled.button`
   }
 `;
 
+// The chat content: question/answer pairs that will be shown in sequence
 const messages = [
   { question: "Hello!", answer: " Hello there! Excited to meet you. I am Souad Yakubu." },
   { question: "What are your hobbies?", answer: " I love cooking, going to the gym, and learning a new skill. I currenty on a daily 'try something new everyday' journey and it has been pretty exciting so far! " },
-  { question: "What is your field of study and why did you choose that field?", answer: " My field of study is computer science, and it represents more than just coding; it's my way of making a significant difference in the world. I’ve truly found my groove in this discipline, which is all about solving puzzles and generating innovative ideas, one of the main reasons I love it so much. However, my passion is deeply rooted in a personal story: when I was 13, my uncle lost his sight, drastically altering his life and highlighting the tough realities faced by people with disabilities. While I know that disabilities do not define us, they undeniably impact our lives. This experience led me to question why living with a disability should hinder anyone from pursuing their dreams. My vision is to leverage artificial intelligence in computer science to create solutions that empower individuals like my uncle. Inspired by Steve Jobs’ quote, 'The people who are crazy enough to think they can change the world are the ones who do.' I strive to be one of those people. With every new skill I acquire, I'm getting closer to building technologies that improve lives and make a meaningful impact." },
+  { question: "What is your field of study and why did you choose that field?", answer: " My field of study is computer science, and it represents more than just coding; it's my way of making a significant difference in the world. I’ve developed a strong sense of purpose in this field, which is all about solving puzzles and generating innovative ideas, one of the main reasons I love it so much. However, my passion is deeply rooted in a personal story: when I was 13, my uncle lost his sight, drastically altering his life and highlighting the tough realities faced by people with disabilities. While I know that disabilities do not define us, they undeniably impact our lives. This experience led me to question why living with a disability should hinder anyone from pursuing their dreams. My vision is to leverage artificial intelligence in computer science to create solutions that empower individuals like my uncle. Inspired by Steve Jobs’ quote, 'The people who are crazy enough to think they can change the world are the ones who do.' I strive to be one of those people. With every new skill I acquire, I'm getting closer to building technologies that improve lives and make a meaningful impact." },
   { question: "That interesting. Can I get a little more personal?", answer: " Okay, let's go for it. " },
   { question: "What is the biggest lesson you learnt outside of the classroom?", answer: " Wow, well there are countless lessons I’ve learned outside the classroom, but one of the most valuable has been the importance of gratitude, even in difficult times. For a long time, I struggled with how unfair life can seem: why does one person live in a mansion while another is homeless? Why do some people face immense hardships while others seem to have everything? Over time, I began to understand that comparing ourselves to others only leads to frustration, and we rarely know the full story behind someone’s life. I also realized that sometimes, setbacks happen for a reason. Missing out on a job might mean there’s a better opportunity ahead. Being delayed in traffic could keep me safe from harm. Even personal challenges, like illness, have taught me to grow and deepen my faith. By embracing gratitude, I’ve learned to appreciate every moment and find peace, trusting that each experience has a purpose." },
   { question: "What is the significance of combining academic excellence with community engagement in your personal development?", answer: " I value the combination of academic excellence and community engagement because together they create a well-rounded, purposeful education. Academic achievement drives me to push my boundaries, to understand complex ideas, and to develop skills that will last a lifetime. But it’s in community engagement that I find a sense of connection and purpose, where what I’m learning goes beyond the classroom and becomes something that can make a difference.When I engage with others, I’m reminded that knowledge is most powerful when shared. Working with different people, hearing their perspectives, and contributing in ways that uplift others gives my academic pursuits real meaning. Learning alone feels incomplete; it’s when I can use what I know to support or connect with others that my education feels the most fulfilling.For me, academic success without community lacks purpose, and community work without knowledge can lack impact. " },
   { question: "Thanks for sharing!", answer: " It was a pleasure. Let's get to know about my experiences!" },
 ];
 
-const IntroductionPage = () => {
-  const navigate = useNavigate();
-  const [currentIndex, setCurrentIndex] = useState(0);
-  const [isTyping, setIsTyping] = useState(false);
-  const [displayedAnswer, setDisplayedAnswer] = useState("");
-  const typingIntervalRef = React.useRef(null);
 
+const IntroductionPage = () => {
+  const navigate = useNavigate(); // Allows navigation to the experience page later
+  const [currentIndex, setCurrentIndex] = useState(0); // Keeps track of which message we're on
+  const [isTyping, setIsTyping] = useState(false); // Controls the typing effect status
+  const [displayedAnswer, setDisplayedAnswer] = useState(""); // What’s currently typed out on screen
+  const typingIntervalRef = React.useRef(null); // Ref to store typing interval so we can clear it
+
+  // Handle user clicking "Continue"
   const handleContinue = () => {
     if (currentIndex < messages.length - 1) {
+      // Move to next message
       setCurrentIndex(currentIndex + 1);
-      setDisplayedAnswer("");
+      setDisplayedAnswer(""); // Reset typed text
     } else {
-
+      // Last message reached, go to experience page
       navigate('/experience');
     }
   };
 
-
+  // Trigger typing effect every time the current message index changes
   useEffect(() => {
     if (currentIndex < messages.length) {
-      setDisplayedAnswer(""); // Clear displayed answer for the new question
+      setDisplayedAnswer(""); // Clear previous answer
       setIsTyping(true); // Start typing indicator
-      typeAnswer(messages[currentIndex].answer); // Start typing effect for the answer
+      typeAnswer(messages[currentIndex].answer); // Begin typing the next answer
     }
 
-
-    return () => clearInterval(typingIntervalRef.current);
+    return () => clearInterval(typingIntervalRef.current); // Cleanup any existing typing intervals
   }, [currentIndex]);
 
+  // Function to simulate typing effect
   const typeAnswer = (answer) => {
     let index = 0;
-    clearInterval(typingIntervalRef.current); // Clear any existing interval
+    clearInterval(typingIntervalRef.current); // Stop any previous typing animation
 
     typingIntervalRef.current = setInterval(() => {
-      setDisplayedAnswer((prev) => prev + answer.charAt(index));
+      setDisplayedAnswer((prev) => prev + answer.charAt(index)); // Reveal one character at a time
       index++;
 
       if (index === answer.length) {
-        clearInterval(typingIntervalRef.current);
-        setIsTyping(false);
+        clearInterval(typingIntervalRef.current); // Stop once full answer is displayed
+        setIsTyping(false); // Stop typing indicator
       }
-    }, 30);
+    }, 30); // Speed of typing (30ms per character)
   };
 
   return (
@@ -175,6 +177,8 @@ const IntroductionPage = () => {
           {isTyping && <TypingIndicator>...</TypingIndicator>}
         </Answer>
       </ChatContainer>
+
+      {/* Only show the Continue button when typing is done and answer is fully displayed */}
       {!isTyping && displayedAnswer && (
         <ContinueButton onClick={handleContinue}>
           Continue
