@@ -4,7 +4,7 @@ Welcome to my personal developer portfolio! This is a living story of my journey
 
 
 ## 🖥️ Demo
-🔗 Live Site: https://yakubusouadportfolio.web.app/  
+🔗 Live Site: [https://yakubusouadportfolio.web.app/  ](https://yakubusouadportfolio.web.app)
 🚀 Features
 * 📂 Projects – Each project solves a real-world problem, whether it's making technology more accessible for people with disabilities or transforming everyday cooking into a smarter, smoother experience. 
 * 🏆 Achievements – Awards, honors, and recognitions in tech and leadership.
