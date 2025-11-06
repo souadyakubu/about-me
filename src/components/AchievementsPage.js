@@ -47,13 +47,16 @@ const AchievementContainer = styled(motion.div)`
   max-width: 800px;
 `;
 
-// Each individual achievement is displayed in this card
 const AchievementCard = styled(motion.div)`
   background: rgba(22, 33, 62, 0.8);
   border-radius: 15px;
   padding: 20px;
   margin-bottom: 20px;
   width: 100%;
+  max-width: 800px;
+  height: 200px; /* uniform card height */
+  overflow: hidden;
+  position: relative;
   box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
   backdrop-filter: blur(5px);
   border: 1px solid rgba(76, 201, 240, 0.3);
@@ -83,14 +86,24 @@ const AchievementLink = styled.a`
   }
 `;
 
-// Animated particle used for a dynamic background effect
+const ReadMore = styled.span`
+  color: #4cc9f0;
+  cursor: pointer;
+  display: block;
+  margin-top: 8px;
+  font-style: italic;
+  &:hover {
+    text-decoration: underline;
+    color: #3a9fc0;
+  }
+`;
+
 const Particle = styled(motion.div)`
   position: absolute;
   background-color: #4cc9f0;
   border-radius: 50%;
 `;
 
-// Array of achievement objects to render dynamically
 const achievements = [
     {
         title: "Collegiate Honors Student",
@@ -98,14 +111,13 @@ const achievements = [
     },
     {
         title: "Research Paper Co-author",
-        description: "Co-authored a research paper titled 'Towards Full Authorship with AI...' accepted for HAI-GEN 2024.",
+        description: "Co-authored the research paper 'Towards Full Authorship with AI: Supporting Revision with AI-Generated Views,' accepted at HAI-GEN 2024, a workshop focused on Human-AI Co-Creation with Generative Models.",
         link: "https://hai-gen.github.io/2024/papers/9904-Kim.pdf"
     },
     {
         title: "Most Creative Award - Hackathon 2024",
         description: "Developed an Accessible Voice Assistant solution that addresses accessibility challenges.",
         projectRef: true,
-        link: "https://github.com/souadyakubu/voice-assistantf"
     },
     {
         title: "Leadership Award – Girls Who Code",
@@ -113,9 +125,16 @@ const achievements = [
     }
 ];
 
-
 const AchievementsPage = () => {
-    const [selectedAchievement, setSelectedAchievement] = useState(null); // Track which card is currently expanded
+    const [expandedCards, setExpandedCards] = useState({});
+    const [selectedAchievement, setSelectedAchievement] = useState(null);
+
+    const toggleExpand = (index) => {
+        setExpandedCards(prev => ({
+            ...prev,
+            [index]: !prev[index]
+        }));
+    };
 
     return (
         <AchievementsPageWrapper
@@ -136,50 +155,52 @@ const AchievementsPage = () => {
                 Achievements
             </Header>
 
-            {/* Display all achievements */}
             <AchievementContainer>
                 <AnimatePresence>
-                    {achievements.map((achievement, index) => (
-                        <AchievementCard
-                            key={index}
-                            layoutId={`achievement-${index}`}
-                            initial={{ opacity: 0, y: 50, rotateX: -15 }}
-                            animate={{ opacity: 1, y: 0, rotateX: 0 }}
-                            transition={{
-                                delay: index * 0.1,
-                                duration: 0.5,
-                                type: "spring",
-                                stiffness: 100
-                            }}
-                            whileHover={{
-                                scale: 1.05,
-                                rotateY: 5,
-                                boxShadow: "0 8px 30px rgba(76, 201, 240, 0.3)"
-                            }}
-                            onClick={() => setSelectedAchievement(index)}
-                        >
-                            <AchievementTitle>{achievement.title}</AchievementTitle>
-                            <AchievementDescription>{achievement.description}</AchievementDescription>
+                    {achievements.map((achievement, index) => {
+                        const isExpanded = expandedCards[index];
+                        const shortDescription = achievement.description.length > 350
+                            ? achievement.description.slice(0, 350) + "..."
+                            : achievement.description;
 
-                            {/* Conditional rendering for external link */}
-                            {achievement.link && (
-                                <AchievementLink href={achievement.link} target="_blank" rel="noopener noreferrer">
-                                    Read the paper →
-                                </AchievementLink>
-                            )}
+                        return (
+                            <AchievementCard
+                                key={index}
+                                layoutId={`achievement-${index}`}
+                                initial={{ opacity: 0, y: 50, rotateX: -15 }}
+                                animate={{ opacity: 1, y: 0, rotateX: 0 }}
+                                transition={{ delay: index * 0.1, duration: 0.5, type: "spring", stiffness: 100 }}
+                                whileHover={{ scale: 1.05, rotateY: 5, boxShadow: "0 8px 30px rgba(76, 201, 240, 0.3)" }}
+                            >
+                                <AchievementTitle>{achievement.title}</AchievementTitle>
+                                <AchievementDescription>
+                                    {isExpanded ? achievement.description : shortDescription}
+                                </AchievementDescription>
 
-                            {/* Conditional rendering for internal project link */}
-                            {achievement.projectRef && (
-                                <AchievementLink as={Link} to="/projects/voice-assistant">
-                                    View project details →
-                                </AchievementLink>
-                            )}
-                        </AchievementCard>
-                    ))}
+                                {achievement.description.length > 350 && (
+                                    <ReadMore onClick={() => toggleExpand(index)}>
+                                        {isExpanded ? "Show less" : "Read more"}
+                                    </ReadMore>
+                                )}
+
+                                {achievement.link && (
+                                    <AchievementLink href={achievement.link} target="_blank" rel="noopener noreferrer">
+                                        Read the paper →
+                                    </AchievementLink>
+                                )}
+
+                                {achievement.projectRef && (
+                                    <AchievementLink as={Link} to="/projects/accessible-voice-assistant">
+                                        View project details →
+                                    </AchievementLink>
+                                )}
+                            </AchievementCard>
+                        );
+                    })}
                 </AnimatePresence>
             </AchievementContainer>
 
-            {/* Expanded view of a selected achievement */}
+            {/* Expanded modal view */}
             <AnimatePresence>
                 {selectedAchievement !== null && (
                     <motion.div
@@ -196,9 +217,9 @@ const AchievementsPage = () => {
                             justifyContent: "center",
                             zIndex: 1000
                         }}
-                        onClick={() => setSelectedAchievement(null)} // Clicking the overlay closes it
+                        onClick={() => setSelectedAchievement(null)}
                     >
-                        <AchievementCard style={{ width: "80%", maxWidth: "600px" }}>
+                        <AchievementCard style={{ width: "80%", maxWidth: "600px", height: "auto" }}>
                             <AchievementTitle>{achievements[selectedAchievement].title}</AchievementTitle>
                             <AchievementDescription>{achievements[selectedAchievement].description}</AchievementDescription>
 
@@ -218,6 +239,7 @@ const AchievementsPage = () => {
                 )}
             </AnimatePresence>
 
+            {/* Background particles */}
             {[...Array(50)].map((_, index) => (
                 <Particle
                     key={index}
