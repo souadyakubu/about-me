@@ -94,7 +94,7 @@ const Particle = styled(motion.div)`
 const achievements = [
     {
         title: "Collegiate Honors Student",
-        description: "Recognized for maintaining a 3.9 GPA while actively participating in student government, academic clubs, and extensive community engagement initiatives..."
+        description: "Recognized for maintaining a 3.9 GPA while actively participating in student government, academic clubs, and extensive community engagement initiatives."
     },
     {
         title: "Research Paper Co-author",
@@ -104,11 +104,12 @@ const achievements = [
     {
         title: "Most Creative Award - Hackathon 2024",
         description: "Developed an Accessible Voice Assistant solution that addresses accessibility challenges.",
-        projectRef: true
+        projectRef: true,
+        link: "https://github.com/souadyakubu/voice-assistantf"
     },
     {
         title: "Leadership Award – Girls Who Code",
-        description: "Recognized for outstanding mentorship and leadership in Girls Who Code..."
+        description: "Recognized for outstanding mentorship and leadership in the Girls Who Code Organisation."
     }
 ];
 
