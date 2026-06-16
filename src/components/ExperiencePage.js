@@ -147,7 +147,15 @@ const experiences = {
   workExperience: [
     {
       title: "Software Engineer",
-      subtitle: "Blvck Sapphire (Remote) | April 2023 - Present",
+      subtitle: "Helix Health Technologies (Remote) | January 2025 – Present",
+      details: [
+        "Developed and tested React and Node.js features for emergency escalation workflows that automatically routed alerts to on-call providers across hospitals and clinics.",
+        "Integrated REST APIs with AWS Lambda and Amazon SNS to support secure real-time notifications, provider messaging, and communication tracking between healthcare teams.",
+      ]
+    },
+    {
+      title: "Software Engineer Intern",
+      subtitle: "Blvck Sapphire (Remote) | February 2024 - January 2025",
       details: [
         "Develop server-side logic, database integration, APIs, and user interfaces, ensuring software reliability.",
         "Design, develop, and maintain AI software applications with facial recognition features.",
@@ -156,7 +164,7 @@ const experiences = {
     },
     {
       title: "Library IT Assistant",
-      subtitle: "Hekman Library | Grand Rapids, MI | May 2023 – Present",
+      subtitle: "Hekman Library | Grand Rapids, MI | May 2023 – January 2025",
       details: [
         "Transformed the library's website with innovative JavaScript frameworks and CSS methods, ensuring top-tier accessibility and user experience.",
         "Manage database operations, ensuring timely updates and optimizing functionality to streamline library operations."
@@ -164,7 +172,7 @@ const experiences = {
     },
     {
       title: "Computer Science Chair",
-      subtitle: "National Society of Black Engineers | May 2023 – Present",
+      subtitle: "National Society of Black Engineers | May 2023 – February 2026",
       details: [
         "Led workshops, mentorships, and hackathons, increasing member participation by 25% and fostering technical growth."
       ]
